@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build and generated output
+dist/
+coverage/
+*.tsbuildinfo
+
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+apps/*/.env
+apps/*/.env.*
+!apps/*/.env.example
+
+# Local runtime data and caches
+.runtime/
+.cache/
+.opencode/
+.omnirush/
+*.tmp
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

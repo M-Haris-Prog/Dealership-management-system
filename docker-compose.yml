@@ -1,0 +1,28 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: gateway-dms-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: gateway_dms
+      MYSQL_USER: gateway_app
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-change-this-local-password}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change-this-local-root-password}
+    ports:
+      - "3307:3306"
+    volumes:
+      - gateway_mysql_data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  redis:
+    image: redis:7-alpine
+    container_name: gateway-dms-redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    volumes:
+      - gateway_redis_data:/data
+
+volumes:
+  gateway_mysql_data:
+  gateway_redis_data:

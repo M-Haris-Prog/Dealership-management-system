@@ -1,0 +1,14 @@
+{
+  "name": "gateway-motors-dms",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Gateway Motors Faisalabad Dealer Management System",
+  "scripts": {
+    "web:dev": "npm --prefix apps/web run dev",
+    "web:typecheck": "npm --prefix apps/web run typecheck",
+    "web:build": "npm --prefix apps/web run build",
+    "api:dev": "npm --prefix apps/api run start:dev",
+    "api:build": "npm --prefix apps/api run build",
+    "api:validate": "npm --prefix apps/api run prisma:validate"
+  }
+}

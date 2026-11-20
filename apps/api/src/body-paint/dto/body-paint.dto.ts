@@ -1,0 +1,13 @@
+import { IsArray, IsBoolean, IsEnum, IsNumber, IsObject, IsOptional, IsString, Min, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+
+export class CreateRepairOrderDto { @IsString() branchId!: string; @IsString() customerId!: string; @IsString() vehicleId!: string; @IsOptional() @IsString() complaint?: string; }
+export class InsuranceCaseDto { @IsString() insurerName!: string; @IsOptional() @IsString() policyNo?: string; @IsOptional() @IsString() claimNo?: string; @IsOptional() @IsEnum(['OPEN','SUBMITTED','APPROVED','REJECTED','SETTLED','CLOSED']) status?: string; @IsOptional() @IsNumber() @Min(0) approvedAmount?: number; @IsOptional() @IsNumber() @Min(0) deductible?: number; @IsOptional() @IsString() notes?: string; }
+export class DamageAssessmentDto { @IsObject() damageAreas!: Record<string, unknown>; @IsOptional() @IsNumber() @Min(0) estimatedLabor?: number; @IsOptional() @IsNumber() @Min(0) estimatedMaterials?: number; @IsOptional() @IsString() notes?: string; }
+export class ApprovalDto { @IsEnum(['CUSTOMER','INSURER']) type!: string; @IsEnum(['PENDING','APPROVED','REJECTED']) status!: string; @IsOptional() @IsNumber() @Min(0) approvedAmount?: number; @IsOptional() @IsString() approvedBy?: string; @IsOptional() @IsString() notes?: string; }
+export class OperationDto { @IsEnum(['BODY','PAINT']) type!: string; @IsString() description!: string; @IsOptional() @IsEnum(['PLANNED','IN_PROGRESS','COMPLETED','ON_HOLD']) status?: string; @IsOptional() @IsNumber() @Min(0) hours?: number; @IsOptional() @IsNumber() @Min(0) rate?: number; @IsOptional() @IsString() technicianId?: string; }
+export class UpdateOperationDto { @IsOptional() @IsEnum(['BODY','PAINT']) type?: string; @IsOptional() @IsString() description?: string; @IsOptional() @IsEnum(['PLANNED','IN_PROGRESS','COMPLETED','ON_HOLD']) status?: string; @IsOptional() @IsNumber() @Min(0) hours?: number; @IsOptional() @IsNumber() @Min(0) rate?: number; @IsOptional() @IsString() technicianId?: string; }
+export class MovementDto { @IsOptional() @IsString() fromLocationId?: string; @IsOptional() @IsString() toLocationId?: string; @IsOptional() @IsString() notes?: string; }
+export class MaterialDto { @IsString() partId!: string; @IsOptional() @IsString() operationId?: string; @IsNumber() @Min(0.0001) quantity!: number; @IsOptional() @IsNumber() @Min(0) unitCost?: number; }
+export class StatusDto { @IsEnum(['OPEN','ASSESSMENT','PENDING_APPROVAL','APPROVED','IN_PROGRESS','QUALITY_CHECK','READY_FOR_INVOICE','INVOICED','READY_FOR_COLLECTION','CLOSED','CANCELLED']) status!: string; }
+export class FinalInspectionDto { @IsObject() checklist!: Record<string, unknown>; @IsBoolean() passed!: boolean; @IsOptional() @IsString() notes?: string; }
